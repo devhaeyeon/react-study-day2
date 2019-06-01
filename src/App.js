@@ -1,86 +1,20 @@
 import React from "react";
 import { Header } from "./components/Header";
+import { Player } from "./components/Player";
+import { AddPlayerForm } from "./components/AddPlayerForm";
 
 import "./App.css";
-
-const players = [
-  { name: "LDK", score: 30, id: 1 },
-  { name: "HONG", score: 40, id: 2 },
-  { name: "KIM", score: 50, id: 3 },
-  { name: "PARK", score: 60, id: 4 }
-];
-
-const Player = props => (
-  <div className="player">
-    <span className="player-name">
-      <button
-        className="remove-player"
-        onClick={() => props.removePlayer(props.id)}
-      >
-        x
-      </button>
-    </span>
-    <span className="player-name">{props.name}</span>
-    <Counter />
-  </div>
-);
-
-class Counter extends React.Component {
-  state = {
-    score: 0,
-    a: 3
-  };
-
-  constructor(props) {
-    super(props);
-    // 1) this.incrementScore = this.incrementScore.bind(this);
-  }
-
-  changeScore = delta => {
-    // 2) arrow 펑션안의 this는 lexical this
-    console.log(this);
-    // 1. state를 변경하는 방법
-    // this.state.score += 1;
-    // this.setState({score: this.state.score + 1});
-    // 2. merge 된다. : 기존 속성으 그대로 유지
-    // 3. 비동기로 처리
-    this.setState(prevState => ({
-      score: prevState.score + delta
-    }));
-  };
-
-  render() {
-    return (
-      <div className="counter">
-        <button
-          className="counter-action decrement"
-          onClick={() => this.changeScore(-1)}
-        >
-          {" "}
-          -{" "}
-        </button>
-        <span className="counter-score">{this.state.score}</span>
-        <button
-          className="counter-action increment"
-          onClick={() => this.changeScore(1)}
-        >
-          {" "}
-          +{" "}
-        </button>
-      </div>
-    );
-  }
-}
 
 class App extends React.Component {
   state = {
     players: [
-      { name: "LDK", id: 1 },
-      { name: "HONG", id: 2 },
-      { name: "KIM", id: 3 },
-      { name: "PARK", id: 4 }
+      { name: "LDK", score: 0, id: 1 },
+      { name: "HONG", score: 0, id: 2 },
+      { name: "KIM", score: 0, id: 3 },
+      { name: "PARK", score: 0, id: 4 }
     ]
   };
+  maxID = 4;
   // 1) player 삭제 콜백 펑션 정의
   handleRemovePlayer = id => {
     console.log(id);
@@ -90,19 +24,60 @@ class App extends React.Component {
     }));
   };
 
+  handleChangeScore = (id, delta) => {
+    console.log(id, delta);
+
+    this.setState(prevState => {
+      this.state.players.forEach(item => {
+        if (item.id === id) {
+          item.score += delta;
+        }
+      });
+      return {
+        players: [...prevState.players] // 배열이면 배열을, 객체면 객체를..
+      };
+    });
+  };
+
+  handleAddPlayer = name => {
+    console.log(name);
+    this.setState(prevState => ({
+      players: [...prevState.players, { name, score: 0, id: ++this.maxId }]
+    }));
+  };
+
+  /*handleAddPlayer = name => {
+    this.setState(prevState => ({
+      players: [...prevState.players, { name, score: 0, id: ++this.maxID }]
+    }));
+    this.setState(prevState => ({
+      players: [
+        ...prevState.players,
+        {
+          name,
+          score: 0,
+          id: ++this.maxID
+        }
+      ];
+    }));
+  };*/
+
   render() {
     return (
       <div className="scoreboard">
-        <Header title="My Scoreboard" totalPlayers={11} />
+        <Header title="My Scoreboard" players={this.state.players} />
 
         {this.state.players.map(player => (
           <Player
             name={player.name}
+            score={player.score}
             key={player.id}
             id={player.id}
             removePlayer={this.handleRemovePlayer}
+            changeScore={this.handleChangeScore}
           />
         ))}
+        <AddPlayerForm addPlayer={this.handleAddPlayer} />
       </div>
     );
   }
