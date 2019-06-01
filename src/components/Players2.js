@@ -1,3 +1,4 @@
+// 미사용
 import React from "react";
 import Counter from "./Counter";
 // 해당 부분만 변경이 됨.

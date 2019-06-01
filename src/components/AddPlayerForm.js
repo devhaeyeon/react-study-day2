@@ -19,6 +19,7 @@ export class AddPlayerForm extends React.Component {
     event.preventDefault();
     //event.stopPropagation();
     // event 버블링 막기 .
+    if (!this.state.value) return false;
     this.props.addPlayer(this.state.value);
   };
   render() {

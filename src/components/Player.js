@@ -6,23 +6,16 @@ import Counter from "./Counter";
 // shallow comparison 값을 비교. 안에 있는 것이 바뀐지 모르기 때문에 딥카피 필요.
 export class Player extends React.Component {
   render() {
-    console.log(this.props.name, "rendered");
+    const { id, name, score, changeScore, removePlayer } = this.props;
     return (
       <div className="player">
         <span className="player-name">
-          <button
-            className="remove-player"
-            onClick={() => this.props.removePlayer(this.props.id)}
-          >
+          <button className="remove-player" onClick={() => removePlayer(id)}>
             x
           </button>
         </span>
-        <span className="player-name">{this.props.name}</span>
-        <Counter
-          score={this.props.score}
-          id={this.props.id}
-          changeScore={this.props.changeScore}
-        />
+        <span className="player-name">{name}</span>
+        <Counter score={score} id={id} changeScore={changeScore} />
       </div>
     );
   }
