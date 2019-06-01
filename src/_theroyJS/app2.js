@@ -1,5 +1,6 @@
 // React element
-/*const title = React.createElement(
+/*
+const title = React.createElement(
   'h1',
   {id:'main-title',title:'this is a title'},
   'My first react element'
@@ -75,4 +76,4 @@ ReactDOM.render(header, document.getElementById('root'));
 //react-dom : render  함수
 // 리액트 엘리먼트에 올려라.
 // 파라미터 하나, 두개 .. 오버로딩이 없지만 타입스크립트 > 오버로딩.
-// 자바스크립트 객체 (리액트 앨리먼트), 실제 뷰. 자바스크립트 객체를 루트에 올려줌.
+// 자바스크립트 객체 (리액트 앨리먼트), 실제 뷰. 자바스크립트 객체를 루트에 올려줌.*/
