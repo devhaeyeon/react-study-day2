@@ -1,10 +1,19 @@
 import React from "react";
-import Counter from "./Counter";
+import { Counter } from "./Counter";
+import PropsTypes from "prop-types";
 // 해당 부분만 변경이 됨.
 // 내부적으로 업데이트 사이클 그런 것을 내부적으로 가지고 있기 때문에.
 // shallow comparison 밖에서 .
 // shallow comparison 값을 비교. 안에 있는 것이 바뀐지 모르기 때문에 딥카피 필요.
 export class Player extends React.Component {
+  // isRequired 필수값. static 변수와 같음
+  static propsTypes = {
+    removePlayer: PropsTypes.func,
+    id: PropsTypes.number,
+    score: PropsTypes.number,
+    name: PropsTypes.string.isRequired,
+    changeScore: PropsTypes.func
+  };
   render() {
     const { id, name, score, changeScore, removePlayer } = this.props;
     return (

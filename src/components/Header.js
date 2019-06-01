@@ -1,6 +1,7 @@
 import React from "react";
 import { Statistics } from "./Statistics";
 import { Stopwatch } from "./Stopwatch";
+import PropsTypes from "prop-types";
 
 // 객체에 있는 것이 { title, players } 을 파라미터로 넣음으로써 바로 할당이 됨.
 export const Header = ({ title, players }) => {
@@ -15,4 +16,19 @@ export const Header = ({ title, players }) => {
       {/* <span className="stats">Players: {totalPlayers}</span> */}
     </header>
   );
+};
+
+Header.propTypes = {
+  title: PropsTypes.string
+};
+
+Header.defaultProps = {
+  title: "Default title",
+  players: PropsTypes.arrayOf(
+    PropsTypes.shape({
+      name: PropsTypes.string,
+      score: PropsTypes.number,
+      id: PropsTypes.number
+    })
+  )
 };
