@@ -19,11 +19,7 @@ export const Header = ({ title, players }) => {
 };
 
 Header.propTypes = {
-  title: PropsTypes.string
-};
-
-Header.defaultProps = {
-  title: "Default title",
+  title: PropsTypes.string,
   players: PropsTypes.arrayOf(
     PropsTypes.shape({
       name: PropsTypes.string,
@@ -31,4 +27,8 @@ Header.defaultProps = {
       id: PropsTypes.number
     })
   )
+};
+
+Header.defaultProps = {
+  title: "Default title"
 };
