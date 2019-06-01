@@ -2,9 +2,10 @@ import React from "react";
 import { Statistics } from "./Statistics";
 import { Stopwatch } from "./Stopwatch";
 import PropsTypes from "prop-types";
+import { connect } from "react-redux";
 
 // 객체에 있는 것이 { title, players } 을 파라미터로 넣음으로써 바로 할당이 됨.
-export const Header = ({ title, players }) => {
+const Header = ({ title, players }) => {
   //console.log(props);
   // destruct assignment
   //  const { title, players } = props;
@@ -32,3 +33,9 @@ Header.propTypes = {
 Header.defaultProps = {
   title: "Default title"
 };
+
+const mapStateToProps = state => ({
+  title: state.playerReducer.title
+});
+
+export default connect(mapStateToProps)(Header);
