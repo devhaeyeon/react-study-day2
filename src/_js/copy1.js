@@ -43,9 +43,10 @@ copyBook 20번지 복사.
 // 2. book을 카피하되 deep copy를 수행한 후에 price를 30000으로 바꾸고 출력하라. 두개의 값이 달라야 한다.
 // 2-1 Object.assign() 사용하여 deep copy하기
 // target:새로운 바구니, score: 기존 바구니
-var copyBook = Object.assign({}, book);
+var copyBook = Object.assign({}, book, { a: 1 }, { title: "changed" }); // 뒤에 있는 title이 오버라이딩됨.
 copyBook.price = 20000;
 console.log(book);
 console.log(copyBook);
+// 나머지 연산자가 중복이 되면 오버라이딩 된다.
 
 // 2-2 es6 spread 연산자를 사용하여 deep copy 하기

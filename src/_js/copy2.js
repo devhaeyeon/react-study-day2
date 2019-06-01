@@ -57,4 +57,7 @@ copyBook 20번지 복사.
 // 새로운이라는 의미가 할당이 되는 것.
 // 기존 공을 잘 가지고 오라.
 // 리액트는 원본 배열을 건드리지말라. 이뮤터블 배열이다.
-var copyBook = { ...book };
+// deep copy.
+var copyBook = { ...book, ...{ a: 1 }, ...{ title: "changed" } };
+copyBook.price = 20000;
+// 다음 주는 promise -> async, await
